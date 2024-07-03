@@ -8,7 +8,7 @@ import {
 } from "react";
 
 
-const usersData = [
+const employeesData = [
     {
       userId: 100,
       location: {
@@ -35,7 +35,7 @@ const usersData = [
 export const DashboardContext = createContext(null);
 
 export default function DashboardContextProvider({ children }) {
-  const [users, setUsers] = useState(usersData);
+  const [employees, setEmployees] = useState(employeesData);
 
 
   /*
@@ -45,7 +45,7 @@ export default function DashboardContextProvider({ children }) {
   the useCallback hook is used to memoize the setters so that they are not re-created on each render, because they are custom setters they are not automatically memoized by react
   */
 
-  const usersSetter = useCallback((data) => {
+  const employeesSetter = useCallback((data) => {
     setUsers(data);
   }, []);
 
@@ -53,8 +53,8 @@ export default function DashboardContextProvider({ children }) {
   return (
     <DashboardContext.Provider
       value={{
-        users: users,
-        usersSetter: usersSetter
+        employees: employees,
+        employeesSetter: employeesSetter
       }}
     >
       {children}

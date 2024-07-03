@@ -16,34 +16,11 @@ const center = {
   lng: -38.523,
 };
 
-// const users = [
-//   {
-//     userId: 100,
-//     location: {
-//       lat: -3.745,
-//       lng: -38.523,
-//     },
-//   },
-//   {
-//     userId: 200,
-//     location: {
-//       lat: -3.745 + 0.001, // Slightly adjust latitude
-//       lng: -38.523,
-//     },
-//   },
-//   {
-//     userId: 200,
-//     location: {
-//       lat: -3.745,
-//       lng: -38.523 - 0.001,
-//     },
-//   },
-// ];
+
 
 function MyComponent() {
-  const { users } = useDashboardContext();
-  console.log('users in google map module', users);
-
+  const { employees } = useDashboardContext();
+  console.log("employees in google map module", employees);
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -56,7 +33,7 @@ function MyComponent() {
     // This is just an example of getting and using the map instance!!! don't just blindly copy!
     const bounds = new window.google.maps.LatLngBounds(center);
 
-    users.forEach((location) => {
+    employees.forEach((location) => {
       bounds.extend({ lat: location.location.lat, lng: location.location.lng });
     });
 
@@ -79,14 +56,16 @@ function MyComponent() {
     >
       {/* Child components, such as markers, info windows, etc. */}
       <>
-        {users.map((marker, index) => (
+        {employees.map((marker, index) => (
           //marker.location is an object that has lat and lng as properties
           <Marker key={index} position={marker.location} />
         ))}
       </>
     </GoogleMap>
   ) : (
-    <></>
+    <>
+      <p>Loading...</p>
+    </>
   );
 }
 
