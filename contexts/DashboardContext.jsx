@@ -1,41 +1,60 @@
 "use client";
 
-import {
-  createContext,
-  useContext,
-  useState,
-  useCallback,
-} from "react";
-
+import { createContext, useContext, useState, useCallback, useEffect } from "react";
 
 const employeesData = [
-    {
-      userId: 100,
-      location: {
-        lat: -3.745,
-        lng: -38.523,
-      },
+  {
+    userId: 100,
+    location: {
+      lat: -3.745,
+      lng: -38.523,
     },
-    {
-      userId: 200,
-      location: {
-          lat: -3.745 + 0.001, // Slightly adjust latitude
-          lng: -38.523,
-      },
+  },
+  {
+    userId: 200,
+    location: {
+      lat: -3.745 + 0.001,
+      lng: -38.523,
     },
-    {
-      userId: 200,
-      location: {
-          lat: -3.745,
-          lng: -38.523 - 0.001,
-      },
+  },
+  {
+    userId: 200,
+    location: {
+      lat: -3.745,
+      lng: -38.523 - 0.001,
     },
-  ];
+  },
+];
 
 export const DashboardContext = createContext(null);
 
 export default function DashboardContextProvider({ children }) {
-  const [employees, setEmployees] = useState(employeesData);
+
+  const [employees, setEmployees] = useState();
+
+// useEffect(() => {
+//   const getEmployees = async () => {
+//     console.log("running get employess");
+//     const response = await fetch("/api/getEmployees");
+//     const data = await response.json();
+//     console.log("data in context: ", data.data);
+// console.log(Array.isArray(data.data))
+// const employeeeArray={...data.data}
+// data.data.map((employee) => {
+//   console.log(employee)
+// })
+
+//     setEmployees(data.data);
+//     // return data.data;
+
+//   };
+
+//   getEmployees();
+// }, [])
+
+
+
+
 
 
   /*
@@ -49,12 +68,11 @@ export default function DashboardContextProvider({ children }) {
     setUsers(data);
   }, []);
 
-
   return (
     <DashboardContext.Provider
       value={{
         employees: employees,
-        employeesSetter: employeesSetter
+        employeesSetter: employeesSetter,
       }}
     >
       {children}
@@ -80,7 +98,7 @@ export function useDashboardContext() {
   const context = useContext(DashboardContext);
   if (!context) {
     throw new Error(
-      "useDashboardContext must be used within a DashboardContextProvider",
+      "useDashboardContext must be used within a DashboardContextProvider"
     );
   }
   return context;

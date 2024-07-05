@@ -15,11 +15,11 @@ const useFetchAllEmployees = () => {
         if (!response.ok) throw new Error('Unable to fetch employees');
         const data = await response.json();
 
-        console.log('employees:', data.employees);
+        // console.log('employees:', data.employees);
 
         // Spread operator creates a new array to avoid mutation
         const employees = [...data.employees];
-        console.log(employees);
+        // console.log(employees);
 
         // Update state using a callback or custom hook (recommended)
         employeesSetter(employees);

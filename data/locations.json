@@ -1,0 +1,68 @@
+[
+    {
+      "name": "Pizza Palace",
+      "address": {
+        "street": "10 Main St",
+        "city": "Seattle",
+        "state": "WA",
+        "zip": "12345"
+      },
+      "geo": {
+        "lat": 47.7262,
+        "long": -122.0321
+      }
+    },
+    {
+      "name": "Coffee Shop",
+      "address": {
+        "street": "201 Market St",
+        "city": "Seattle",
+        "state": "WA",
+        "zip": "98765"
+      },
+      "geo": {
+        "lat": 47.4862,
+        "long": -122.6321
+      }
+    },
+    {
+      "name": "Tech Company",
+      "address": {
+        "street": "333 Innovation Way",
+        "city": "Seattle",
+        "state": "WA",
+        "zip": "95131"
+      },
+      "geo": {
+        "lat": 47.8262,
+        "long": -122.1321
+      }
+    },
+    {
+      "name": "Museum of Art",
+      "address": {
+        "street": "4 Cherry Blossom Lane",
+        "city": "Seattle",
+        "state": "WA",
+        "zip": "09876"
+      },
+      "geo": {
+        "lat": 47.5862,
+        "long": -122.5321
+      }
+    },
+    {
+      "name": "National Park",
+      "address": {
+        "street": "",
+        "city": "Seattle",
+        "state": "WA",
+        "zip": "12398"
+      },
+      "geo": {
+        "lat": 47.3862,
+        "long": -122.7321
+      }
+    }
+  ]
+
