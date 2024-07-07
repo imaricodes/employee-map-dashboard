@@ -6,17 +6,6 @@ export async function GET() {
     //get mongodb connection
     const client = await connectToMongoDB();
 
-    //access the db with database name
-    // const db = client.db("sample_airbnb");
-
-    // let count = await db.collection("listingsAndReviews").countDocuments();
-    // console.log("count", count);
-
-    // const cursor = coll.find(filter);
-    // const result = await cursor.toArray();
-
-    console.log("finding all employee records");
-
     const collection = client
       .db(process.env.MONGO_DATABASE)
       .collection("employees");
@@ -33,7 +22,7 @@ export async function GET() {
         console.log(result);
         return new NextResponse(JSON.stringify({ data: result }), { status: 200, headers: { "Content-Type": "application/json" } });
       } else {
-          console.log("Summary not available");
+          console.log("Employees not available");
 
       }
     } catch (error) {

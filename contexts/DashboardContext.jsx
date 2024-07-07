@@ -1,67 +1,41 @@
 "use client";
 
-import { createContext, useContext, useState, useCallback, useEffect } from "react";
-
-const employeesData = [
-  {
-    userId: 100,
-    location: {
-      lat: -3.745,
-      lng: -38.523,
-    },
-  },
-  {
-    userId: 200,
-    location: {
-      lat: -3.745 + 0.001,
-      lng: -38.523,
-    },
-  },
-  {
-    userId: 200,
-    location: {
-      lat: -3.745,
-      lng: -38.523 - 0.001,
-    },
-  },
-];
+import {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  useEffect,
+} from "react";
 
 export const DashboardContext = createContext(null);
 
 export default function DashboardContextProvider({ children }) {
-
   const [employees, setEmployees] = useState();
+  const [employeesLoading, setEmployeesLoading] = useState(true);
 
-// useEffect(() => {
-//   const getEmployees = async () => {
-//     console.log("running get employess");
-//     const response = await fetch("/api/getEmployees");
-//     const data = await response.json();
-//     console.log("data in context: ", data.data);
-// console.log(Array.isArray(data.data))
-// const employeeeArray={...data.data}
-// data.data.map((employee) => {
-//   console.log(employee)
-// })
+  //set initial employees
+  useEffect(() => {
+      const fetchAllEmployees = async () => {
+        try {
+          const response = await fetch("/api/getEmployees");
+          if (!response.ok) throw new Error("Unable to fetch employees");
+          const data = await response.json();
+          const employees = data.data;
+          setEmployees(employees);
+          setEmployeesLoading(false);
+        } catch (error) {
+          console.log(error);
+        }
+      };
 
-//     setEmployees(data.data);
-//     // return data.data;
+      fetchAllEmployees();
 
-//   };
-
-//   getEmployees();
-// }, [])
-
-
-
-
-
+  }, []);
 
   /*
-  These setters will update the state and also update the indexedDB. There one for each state except for triggerMapReDraw.
-  triggerMapReDraw is used to force a re-render of the map when the map view is changed. It is not stored in indexedDB
 
-  the useCallback hook is used to memoize the setters so that they are not re-created on each render, because they are custom setters they are not automatically memoized by react
+  The useCallback hook is used to memoize the setters so that they are not re-created on each render, because they are custom setters they are not automatically memoized by react
   */
 
   const employeesSetter = useCallback((data) => {
@@ -72,6 +46,7 @@ export default function DashboardContextProvider({ children }) {
     <DashboardContext.Provider
       value={{
         employees: employees,
+        employeesLoading: employeesLoading,
         employeesSetter: employeesSetter,
       }}
     >

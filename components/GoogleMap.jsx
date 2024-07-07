@@ -14,18 +14,12 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import { calculateCenter } from "@/app/lib/calculateCenter";
+import { useDashboardContext } from "@/contexts/DashboardContext";
 
 const containerStyle = {
   width: "100%", // Set width to 100% for responsiveness
   height: "100%", // Set height to 100% for responsiveness
-  // width: '400px', // Set width to 100% for responsiveness
-  // height: '400px', // Set height to 100% for responsiveness
 };
-
-// const center = {
-//   lat: -3.745,
-//   lng: -38.523,
-// };
 
 const options = {
   disableDefaultUI: true,
@@ -34,25 +28,11 @@ const options = {
 };
 
 function MyComponent() {
-  // const { employees } = useDashboardContext();
-  // console.log("employees in google map module", employees);
-  // console.log("employees in google map module", employees);
+  const { employees, employeesLoading } = useDashboardContext();
   const [map, setMap] = useState(null);
-  const [employees, setEmployees] = useState([]);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   const mapRef = useRef(null);
   const centerRef = useRef(null);
-
-  useEffect(() => {
-    const getEmployees = async () => {
-      const response = await fetch("/api/getEmployees");
-      const data = await response.json();
-      data.data.map((employee) => {});
-      centerRef.current = calculateCenter(data.data);
-      setEmployees(data.data);
-    };
-    getEmployees();
-  }, []);
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -61,16 +41,12 @@ function MyComponent() {
 
   const onLoad = useCallback(
     function callback(map) {
-      console.log("employees in bounds before: ", employees);
       mapRef.current = map;
 
       const bounds = new window.google.maps.LatLngBounds(centerRef.current);
 
       if (employees.length === 0) {
         employees.forEach((employee) => {
-          console.log("employee lat", employee.geo);
-          console.log("employee lat", employee.geo.lat);
-          console.log("employee lng", employee.geo.lat);
           bounds.extend({ lat: employee.geo.lat, lng: employee.geo.lng });
           map.fitBounds(bounds);
         });
@@ -86,7 +62,7 @@ function MyComponent() {
   }, []);
 
   useEffect(() => {
-    if (employees.length > 0) {
+    if (!employeesLoading && employees.length > 0) {
       calculateCenter(employees);
     }
     if (mapRef.current && employees.length > 0) {
@@ -99,7 +75,7 @@ function MyComponent() {
   }, [employees]);
 
   if (isLoaded) {
-    if (employees.length > 0) {
+    if (!employeesLoading && employees.length > 0) {
       return (
         <GoogleMap
           mapContainerStyle={containerStyle}
@@ -125,15 +101,12 @@ function MyComponent() {
                 position={selectedEmployee.geo}
                 onCloseClick={() => setSelectedEmployee(null)}
               >
-                <div classname="text-black h-96 ">
+                <div className="text-black">
                   <span className="">
-                    <h2 className="text-black bg-green-500 text-sm font-bold">
-                      {selectedEmployee.name.first}  {selectedEmployee.name.last}
+                    <h2 className="text-black text-sm font-bold">
+                      {selectedEmployee.name.first} {selectedEmployee.name.last}
                     </h2>
-
                   </span>
-
-
                 </div>
               </InfoWindow>
             )}
