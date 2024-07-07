@@ -2,18 +2,21 @@
 
 import React from "react";
 import GoogleMap from "@/components/GoogleMap";
+import EmployeesList from "@/components/EmployeesList";
 
 const Dashboard = () => {
   return (
-    <div className="w-full bg-purple-400 h-screen">
-        <div className="bg-red-400 w-full">
-            selectors and filters
-        </div>
-      <div className="flex flex-col-reverse md:flex-row-reverse h-96">
-        <div className="bg-yellow-300 grow">left side</div>
-        <div className="bg-green-400 w-full h-full md:basis-[60%] ">
+    <div className="w-full bg-purple-400 h-full">
+      <div className="bg-red-400 w-full h-16 fixed z-10">selectors and filters</div>
+      <div className="flex h-full">
+      <div className="bg-green-400 w-3/5">
           <GoogleMap />
         </div>
+        {/* employees list component here */}
+        <div className="flex-grow h-full overflow-y-auto">
+          <EmployeesList />
+        </div>
+
       </div>
     </div>
   );
