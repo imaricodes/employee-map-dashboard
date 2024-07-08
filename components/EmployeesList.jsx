@@ -1,15 +1,10 @@
 import React from 'react'
+import Employee from '@/components/Employee'
 
 const EmployeesList = () => {
   return (
-    <div className="bg-yellow-300 ">
-    <div className="w-full h-[200px] bg-green-500"></div>
-    <div className="w-full h-[200px] bg-orange-500"></div>
-    <div className="w-full h-[200px] bg-blue-500"></div>
-    <div className="w-full h-[200px] bg-red-500"></div>
-    <div className="w-full h-[200px] bg-green-500"></div>
-    <div className="w-full h-[200px] bg-red-500"></div>
-    <div className="w-full h-[200px] bg-orange-500"></div>
+    <div className=" min-h-screen mt-16 ">
+        <Employee />
   </div>
   )
 }

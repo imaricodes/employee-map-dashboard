@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <DashboardContextProvider>
-        <body className={`${inter.className} h-full bg-white`}>{children}</body>
+        <body className={`${inter.className} h-full`}>{children}</body>
       </DashboardContextProvider>
     </html>
   );

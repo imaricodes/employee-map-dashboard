@@ -70,7 +70,9 @@ function MyComponent() {
       employees.forEach((employee) => {
         bounds.extend({ lat: employee.geo.lat, lng: employee.geo.lng });
       });
-      mapRef.current.fitBounds(bounds);
+      mapRef.current.fitBounds(bounds , {padding: 50});
+      //reduce zoom by 2 on load
+      map.setZoom(map.getZoom() - 2);
     }
   }, [employees]);
 
@@ -80,7 +82,7 @@ function MyComponent() {
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={centerRef.current}
-          zoom={13} // Increased zoom level for Seattle
+          zoom={12} // Increased zoom level for Seattle
           onLoad={onLoad}
           onUnmount={onUnmount}
           options={options}
