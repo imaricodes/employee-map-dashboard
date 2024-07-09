@@ -6,13 +6,6 @@ export async function GET() {
     //get mongodb connection
     const client = await connectToMongoDB();
 
-    // const collection = client
-    //   .db(process.env.MONGO_DATABASE)
-    //   .collection("employees");
-
-    //    //check collection name
-    // console.log('Using collection:', collection.collectionName);
-
     const db = client.db(); // Use the default database specified in the connection string
     const collection = db.collection('employees'); // Specify the collection 'employees'
 
