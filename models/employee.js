@@ -98,8 +98,12 @@ const EmployeeSchema = new mongoose.Schema({
   assignmentAddress : {
     type: assignmentAddressSchema,
     default: null,
-  }
-});
+  },
+},
+{
+  timestamps: true
+}
+);
 
 // Define the model
 const Employee = mongoose.models.Employee || mongoose.model('Employee', EmployeeSchema);
