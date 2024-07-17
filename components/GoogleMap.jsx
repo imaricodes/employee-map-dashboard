@@ -7,14 +7,15 @@ import React, {
   useEffect,
   useRef,
 } from "react";
+
 import {
   GoogleMap,
   useJsApiLoader,
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
-import { calculateCenter } from "@/app/lib/calculateCenter";
 import { useDashboardContext } from "@/contexts/DashboardContext";
+import { filterEmployeesWithValidGeo, calculateCenter } from "@/app/lib/googleMapUtilities";
 
 const containerStyle = {
   width: "100%", // Set width to 100% for responsiveness
@@ -29,6 +30,7 @@ const options = {
 
 function MyComponent() {
   const { employees, employeesLoading } = useDashboardContext();
+  const [validEmployees, setValidEmployees] = useState([]);
   const [map, setMap] = useState(null);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   const mapRef = useRef(null);
@@ -44,9 +46,11 @@ function MyComponent() {
       mapRef.current = map;
 
       const bounds = new window.google.maps.LatLngBounds(centerRef.current);
+      console.log('employees legth: ', employees.length)
 
-      if (employees.length === 0) {
-        employees.forEach((employee) => {
+      if (employees.length > 0) {
+        const validEmployees = filterEmployeesWithValidGeo(employees);
+        validEmployees.forEach((employee) => {
           bounds.extend({ lat: employee.geo.lat, lng: employee.geo.lng });
           map.fitBounds(bounds);
         });
@@ -63,12 +67,12 @@ function MyComponent() {
 
   useEffect(() => {
     if (!employeesLoading && employees.length > 0) {
-      console.log("employees in map component", employees);
       calculateCenter(employees);
     }
     if (mapRef.current && employees.length > 0) {
       const bounds = new window.google.maps.LatLngBounds();
-      employees.forEach((employee) => {
+      const validEmployees = filterEmployeesWithValidGeo(employees);
+      validEmployees.forEach((employee) => {
         bounds.extend({ lat: employee.geo.lat, lng: employee.geo.lng });
       });
       mapRef.current.fitBounds(bounds, { padding: 50 });
@@ -107,7 +111,7 @@ function MyComponent() {
                 <div className="text-black">
                   <span className="">
                     <h2 className="text-black text-sm font-bold">
-                      {selectedEmployee.name.first} {selectedEmployee.name.last}
+                      {selectedEmployee.firstName} {selectedEmployee.lastName}
                     </h2>
                   </span>
                 </div>
