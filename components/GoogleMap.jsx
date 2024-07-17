@@ -63,6 +63,7 @@ function MyComponent() {
 
   useEffect(() => {
     if (!employeesLoading && employees.length > 0) {
+      console.log("employees in map component", employees);
       calculateCenter(employees);
     }
     if (mapRef.current && employees.length > 0) {
@@ -70,7 +71,7 @@ function MyComponent() {
       employees.forEach((employee) => {
         bounds.extend({ lat: employee.geo.lat, lng: employee.geo.lng });
       });
-      mapRef.current.fitBounds(bounds , {padding: 50});
+      mapRef.current.fitBounds(bounds, { padding: 50 });
       //reduce zoom by 2 on load
       map.setZoom(map.getZoom() - 2);
     }

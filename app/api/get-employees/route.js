@@ -26,9 +26,6 @@ export async function GET() {
       } else if (result.length > 0) {
           // console.log(result);
         return new NextResponse(JSON.stringify({ data: result }), { status: 200, headers: { "Content-Type": "application/json" } });
-      } else {
-          console.log("Employees not available");
-
       }
     } catch (error) {
         console.log('error in query try block', error)

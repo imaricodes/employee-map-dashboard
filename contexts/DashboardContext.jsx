@@ -18,7 +18,7 @@ export default function DashboardContextProvider({ children }) {
   useEffect(() => {
       const fetchAllEmployees = async () => {
         try {
-          const response = await fetch("/api/getEmployees");
+          const response = await fetch("/api/get-employees");
           if (!response.ok) throw new Error("Unable to fetch employees");
           const data = await response.json();
           const employees = data.data;

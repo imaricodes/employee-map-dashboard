@@ -7,7 +7,7 @@ const contactSchema = new mongoose.Schema({
   },
 });
 
-const addressSchema = new mongoose.Schema({
+const employeeAddressSchema = new mongoose.Schema({
   street: {
     type: String,
     required: false,
@@ -37,18 +37,37 @@ const geoSchema = new mongoose.Schema({
   },
 });
 
+const assignmentAddressSchema = new mongoose.Schema({
+  street: {
+    type: String,
+    required: false,
+  },
+  city: {
+    type: String,
+    required: false,
+  },
+  state: {
+    type: String,
+    required: false,
+  },
+  zip: {
+    type: String,
+    required: false,
+  },
+});
+
 const EmployeeSchema = new mongoose.Schema({
   firstName: {
     type: String,
-    required: false,
+    required: true,
   },
   lastName: {
     type: String,
-    required: false,
+    required: true,
   },
   email: {
     type: String,
-    required: false,
+    required: true,
     unique: true,
   },
   isAdmin: {
@@ -59,8 +78,8 @@ const EmployeeSchema = new mongoose.Schema({
     type: contactSchema,
     default: null,
   },
-  address: {
-    type: addressSchema,
+  employeeAddress: {
+    type: employeeAddressSchema,
     default: null,
   },
   locationName: {
@@ -75,6 +94,11 @@ const EmployeeSchema = new mongoose.Schema({
     type: geoSchema,
     default: null,
   },
+
+  assignmentAddress : {
+    type: assignmentAddressSchema,
+    default: null,
+  }
 });
 
 // Define the model
