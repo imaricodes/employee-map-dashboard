@@ -2,7 +2,7 @@ import { connectToMongoDB } from "@/app/lib/db";
 import { NextResponse } from "next/server";
 import mongoose from "mongoose";
 
-export async function DELETE(request) {
+export async function GET(request) {
   //retrieve id from url params
   const id = request.nextUrl.searchParams.get("id");
   console.log("id: ", id);
@@ -24,10 +24,8 @@ export async function DELETE(request) {
     );
   }
 
-
-  //connect to mongodb and find empployee,
+  // connect to mongodb and find empployee,
   // if employee not found, return error
-  // if employee found, delete employee
 
   try {
     // Ensure the database connection is established
@@ -46,7 +44,7 @@ export async function DELETE(request) {
 
     // Find one employee by object id
     const result = await collection.findOne({ _id: objectId });
-    console.log("employee: ", result);
+    console.log("employee found: ", result);
 
     // if no result, return error
     if (!result) {
@@ -56,14 +54,8 @@ export async function DELETE(request) {
       );
     }
 
-    // if result, delete result
-    if (result) {
-      const deletedEmployee = await collection.deleteOne({ _id: objectId });
-      console.log("deletedEmployee: ", deletedEmployee);
-    }
-
     return NextResponse.json(
-      { message: "Connected correctly, collection found, employee deleted" },
+      { message: "Connected correctly, collection found, employee found" },
       { status: 200 }
     );
   } catch (error) {
