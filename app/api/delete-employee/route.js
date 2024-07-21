@@ -1,6 +1,8 @@
 import { connectToMongoDB } from "@/app/lib/db";
 import { NextResponse } from "next/server";
 import mongoose from "mongoose";
+import { getCollectionAndObjectId } from "@/app/lib/mongoHelperFunctions/getCollectionAndObjectId";
+
 
 export async function DELETE(request) {
   //retrieve id from url params
@@ -22,25 +24,8 @@ export async function DELETE(request) {
     );
   }
 
-
-  //connect to mongodb and find empployee,
-  // if employee not found, return error
-  // if employee found, delete employee
-
   try {
-    // Ensure the database connection is established
-    const client = await connectToMongoDB();
-    const db = client.db(); // Use the default database specified in the connection string
-    const collection = db.collection("employees"); // Specify the collection 'employees'. This will be used to insert the new employee document. The collection will be created if it doesn't already exist
-
-    // Check db connection name
-    console.log("Connected to database name:", db.databaseName);
-
-    // Check collection name
-    console.log("Using collection:", collection.collectionName);
-
-    // Convert the employeeId string to an ObjectId using Mongoose
-    const objectId = new mongoose.Types.ObjectId(id);
+    const { collection, objectId } = await getCollectionAndObjectId("employees", id);
 
     // Find one employee by object id
     const result = await collection.findOne({ _id: objectId });
