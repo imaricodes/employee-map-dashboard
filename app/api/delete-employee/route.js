@@ -5,8 +5,6 @@ import mongoose from "mongoose";
 export async function DELETE(request) {
   //retrieve id from url params
   const id = request.nextUrl.searchParams.get("id");
-  console.log("id: ", id);
-  console.log("id type: ", typeof id);
 
   //check for id parameter
   if (!id) {
