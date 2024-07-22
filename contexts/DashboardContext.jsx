@@ -16,21 +16,21 @@ export default function DashboardContextProvider({ children }) {
 
   //set initial employees
   useEffect(() => {
-      const fetchAllEmployees = async () => {
-        try {
-          const response = await fetch("/api/get-employees");
-          if (!response.ok) throw new Error("Unable to fetch employees");
-          const data = await response.json();
-          const employees = data.data;
-          setEmployees(employees);
-          setEmployeesLoading(false);
-        } catch (error) {
-          console.log(error);
-        }
-      };
+    const fetchAllEmployees = async () => {
+      try {
+        const response = await fetch("/api/get-employees" ,{ cache: 'no-store'});
+        if (!response.ok) throw new Error("Unable to fetch employees");
+        const data = await response.json();
+        const employees = data.data;
+        // console.log("employees in dashboard context AllEmployees", employees);
+        setEmployees(employees);
+        setEmployeesLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-      fetchAllEmployees();
-
+    fetchAllEmployees();
   }, []);
 
   /*
