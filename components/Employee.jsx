@@ -24,7 +24,7 @@ const Employee = ({ employee }) => {
 
 
       <div className="flex gap-2 items-start">
-        <RemoveBtn />
+        <RemoveBtn employeeId={employee._id} />
         <Link href={`/editEmployee/${employee._id}`}>
           <HiPencilAlt size={24} />
         </Link>
