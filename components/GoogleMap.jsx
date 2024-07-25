@@ -15,7 +15,10 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import { useDashboardContext } from "@/contexts/DashboardContext";
-import { filterEmployeesWithValidGeo, calculateCenter } from "@/app/lib/googleMapUtilities";
+import {
+  filterEmployeesWithValidGeo,
+  calculateCenter,
+} from "@/app/lib/googleMapUtilities";
 
 const containerStyle = {
   width: "100%", // Set width to 100% for responsiveness
@@ -36,6 +39,8 @@ function MyComponent() {
   const mapRef = useRef(null);
   const centerRef = useRef(null);
 
+  console.log("employees in map: ", employees);
+
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY,
@@ -46,7 +51,7 @@ function MyComponent() {
       mapRef.current = map;
 
       const bounds = new window.google.maps.LatLngBounds(centerRef.current);
-      console.log('employees legth: ', employees.length)
+      console.log("employees legth: ", employees.length);
 
       if (employees.length > 0) {
         const validEmployees = filterEmployeesWithValidGeo(employees);

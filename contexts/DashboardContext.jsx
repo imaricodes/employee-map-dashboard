@@ -47,7 +47,9 @@ export default function DashboardContextProvider({ children }) {
       value={{
         employees: employees,
         employeesLoading: employeesLoading,
+        setEmployeesLoading: setEmployeesLoading,
         employeesSetter: employeesSetter,
+        setEmployees: setEmployees,
       }}
     >
       {children}

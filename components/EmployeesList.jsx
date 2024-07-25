@@ -4,11 +4,29 @@ import { useDashboardContext } from "@/contexts/DashboardContext";
 
 const EmployeesList = () => {
   // get emmployees from context
-  const { employees, employeesLoading } = useDashboardContext();
+  const { employees, setEmployees,  employeesLoading, setEmployeesLoading } = useDashboardContext();
 
-  useEffect(() => {
-    console.log("employees in employee list", employees);
-  }, [employees]);
+
+    // fetch all employees
+    const fetchAllEmployees = async () => {
+      try {
+        setEmployeesLoading(true);
+        const response = await fetch("/api/get-employees", { cache: 'no-store' });
+        if (!response.ok) throw new Error("Unable to fetch employees");
+        const data = await response.json();
+        setEmployees(data.data);
+        setEmployeesLoading(false);
+      } catch (error) {
+        console.log(error);
+        setEmployeesLoading(false);
+      }
+    };
+
+    useEffect(() => {
+      fetchAllEmployees();
+    }, []);
+
+
 
   return (
     //map over employees, pass data to employee component
