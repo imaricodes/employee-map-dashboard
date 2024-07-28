@@ -18,7 +18,7 @@ const Employee = ({ employee }) => {
         )}
         <p className="text-xs mb-4">Email: {employee.email}</p>
         <div className=" bg-green-500 py-1 px-2 text-center">
-        <Link href="/addEmployee/123" className="text-white">Add Assignment</Link>
+        <Link href={`/addAssignment/${employee._id}`} className="text-white">Add Assignment</Link>
       </div>
       </div>
 

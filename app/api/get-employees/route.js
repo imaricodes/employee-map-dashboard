@@ -10,10 +10,10 @@ export async function GET() {
     const collection = db.collection('employees'); // Specify the collection 'employees'
 
     //check db connection name
-    console.log('Connected to database:', db.databaseName);
+    // console.log('Connected to database:', db.databaseName);
 
     //check collection name
-    console.log('Using collection:', collection.collectionName);
+    // console.log('Using collection:', collection.collectionName);
 
     const cursor = collection.find({});
     try {

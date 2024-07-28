@@ -12,10 +12,10 @@ export async function getCollectionAndObjectId(collectionName, id) {
     const collection = db.collection(collectionName); // Use the specified collection
 
      //check db connection name
-     console.log("Connected to database name:", db.databaseName);
+    //  console.log("Connected to database name:", db.databaseName);
 
      //check collection name
-     console.log("Using collection:", collection.collectionName);
+    //  console.log("Using collection:", collection.collectionName);
 
     // Convert the id string to an ObjectId
     // Convert the employeeId string to an ObjectId using Mongoose

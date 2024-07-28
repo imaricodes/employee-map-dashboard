@@ -34,17 +34,17 @@ export async function GET(request) {
     const collection = db.collection("employees"); // Specify the collection 'employees'. This will be used to insert the new employee document. The collection will be created if it doesn't already exist
 
     // Check db connection name
-    console.log("Connected to database name:", db.databaseName);
+    // console.log("Connected to database name:", db.databaseName);
 
     // Check collection name
-    console.log("Using collection:", collection.collectionName);
+    // console.log("Using collection:", collection.collectionName);
 
     // Convert the employeeId string to an ObjectId using Mongoose
     const objectId = new mongoose.Types.ObjectId(id);
 
     // Find one employee by object id
     const result = await collection.findOne({ _id: objectId });
-    console.log("employee found: ", result);
+    console.log("employee found in get employee route: ", result);
 
     // if no result, return error
     if (!result) {
@@ -55,7 +55,7 @@ export async function GET(request) {
     }
 
     return NextResponse.json(
-      { message: "Connected correctly, collection found, employee found" },
+      { result },
       { status: 200 }
     );
   } catch (error) {

@@ -26,7 +26,7 @@ export async function PUT(request, { params }) {
 
     // Find one employee by object id
     const result = await collection.findOne({ _id: objectId });
-    console.log("employee: ", result);
+    // console.log("employee: ", result);
 
     // if no result, return error
     if (!result) {
