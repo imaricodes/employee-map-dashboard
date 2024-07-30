@@ -11,7 +11,7 @@ const RemoveBtn = ({ employeeId }) => {
       // alert("confirmed");
 
       const res = await fetch(
-        `http://localhost:3000/api/delete-employee?id=${employeeId}`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/delete-employee?id=${employeeId}`,
         {
           method: "DELETE",
         }
