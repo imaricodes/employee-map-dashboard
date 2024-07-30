@@ -15,23 +15,26 @@ export default function DashboardContextProvider({ children }) {
   const [employeesLoading, setEmployeesLoading] = useState(true);
 
   //set initial employees
-  useEffect(() => {
-    const fetchAllEmployees = async () => {
-      try {
-        const response = await fetch("/api/get-employees" ,{ cache: 'no-store'});
-        if (!response.ok) throw new Error("Unable to fetch employees");
-        const data = await response.json();
-        const employees = data.data;
-        // console.log("employees in dashboard context AllEmployees", employees);
-        setEmployees(employees);
-        setEmployeesLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchAllEmployees = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/get-employees`,
+  //         { cache: "no-store" }
+  //       );
+  //       if (!response.ok) throw new Error("Unable to fetch employees");
+  //       const data = await response.json();
+  //       const employees = data.data;
+  //       // console.log("employees in dashboard context AllEmployees", employees);
+  //       setEmployees(employees);
+  //       setEmployeesLoading(false);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
 
-    fetchAllEmployees();
-  }, []);
+  //   fetchAllEmployees();
+  // }, []);
 
   /*
 
