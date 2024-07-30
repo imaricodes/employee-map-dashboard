@@ -3,11 +3,11 @@ import mongoose from "mongoose";
 const contactSchema = new mongoose.Schema({
   phone: {
     type: String,
-    required: false,
+    required: true,
   },
 });
 
-const addressSchema = new mongoose.Schema({
+const employeeAddressSchema = new mongoose.Schema({
   street: {
     type: String,
     required: false,
@@ -37,18 +37,41 @@ const geoSchema = new mongoose.Schema({
   },
 });
 
+const assignmentAddressSchema = new mongoose.Schema({
+  street: {
+    type: String,
+    required: false,
+  },
+  city: {
+    type: String,
+    required: false,
+  },
+  state: {
+    type: String,
+    required: false,
+  },
+  zip: {
+    type: String,
+    required: false,
+  },
+});
+
 const EmployeeSchema = new mongoose.Schema({
   firstName: {
     type: String,
-    required: false,
+    required: true,
   },
   lastName: {
     type: String,
-    required: false,
+    required: true,
+  },
+  phone: {
+    type: String,
+    required: false
   },
   email: {
     type: String,
-    required: false,
+    required: true,
     unique: true,
   },
   isAdmin: {
@@ -59,8 +82,8 @@ const EmployeeSchema = new mongoose.Schema({
     type: contactSchema,
     default: null,
   },
-  address: {
-    type: addressSchema,
+  employeeAddress: {
+    type: employeeAddressSchema,
     default: null,
   },
   locationName: {
@@ -73,9 +96,18 @@ const EmployeeSchema = new mongoose.Schema({
   },
   geo: {
     type: geoSchema,
+    required: false,
+  },
+
+  assignmentAddress : {
+    type: assignmentAddressSchema,
     default: null,
   },
-});
+},
+{
+  timestamps: true
+}
+);
 
 // Define the model
 const Employee = mongoose.models.Employee || mongoose.model('Employee', EmployeeSchema);

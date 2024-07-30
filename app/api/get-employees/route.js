@@ -6,21 +6,14 @@ export async function GET() {
     //get mongodb connection
     const client = await connectToMongoDB();
 
-    // const collection = client
-    //   .db(process.env.MONGO_DATABASE)
-    //   .collection("employees");
-
-    //    //check collection name
-    // console.log('Using collection:', collection.collectionName);
-
     const db = client.db(); // Use the default database specified in the connection string
     const collection = db.collection('employees'); // Specify the collection 'employees'
 
     //check db connection name
-    console.log('Connected to database:', db.databaseName);
+    // console.log('Connected to database:', db.databaseName);
 
     //check collection name
-    console.log('Using collection:', collection.collectionName);
+    // console.log('Using collection:', collection.collectionName);
 
     const cursor = collection.find({});
     try {
@@ -33,9 +26,6 @@ export async function GET() {
       } else if (result.length > 0) {
           // console.log(result);
         return new NextResponse(JSON.stringify({ data: result }), { status: 200, headers: { "Content-Type": "application/json" } });
-      } else {
-          console.log("Employees not available");
-
       }
     } catch (error) {
         console.log('error in query try block', error)
