@@ -6,12 +6,17 @@ const EmployeesList = () => {
   // get emmployees from context
   const { employees, setEmployees,  employeesLoading, setEmployeesLoading } = useDashboardContext();
 
+  //setEmployees to null initially
+  useEffect(() => {
+    setEmployees(null);
+  }, []);
+
 
     // fetch all employees
     const fetchAllEmployees = async () => {
       try {
         setEmployeesLoading(true);
-        const response = await fetch("/api/get-employees", { cache: 'no-store' });
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/get-employees`, { cache: 'no-store' });
         if (!response.ok) throw new Error("Unable to fetch employees");
         const data = await response.json();
         setEmployees(data.data);
