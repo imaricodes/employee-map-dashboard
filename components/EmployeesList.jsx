@@ -1,15 +1,17 @@
 import { useState, useEffect } from "react";
 import Employee from "@/components/Employee";
-import { useDashboardContext } from "@/contexts/DashboardContext";
+// import { useDashboardContext } from "@/contexts/DashboardContext";
 
 const EmployeesList = () => {
   // get emmployees from context
-  const { employees, setEmployees,  employeesLoading, setEmployeesLoading } = useDashboardContext();
+  // const { employees, setEmployees,  employeesLoading, setEmployeesLoading } = useDashboardContext();
+  const [employees, setEmployees,] = useState()
+  const [employeesLoading, setEmployeesLoading] = useState(true);
 
   //setEmployees to null initially
-  useEffect(() => {
-    setEmployees(null);
-  }, []);
+  // useEffect(() => {
+  //   setEmployees(null);
+  // }, []);
 
 
     // fetch all employees
