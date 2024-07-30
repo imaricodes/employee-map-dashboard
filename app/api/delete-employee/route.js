@@ -5,6 +5,8 @@ import { getCollectionAndObjectId } from "@/app/lib/mongoHelperFunctions/getColl
 
 
 export async function DELETE(request) {
+
+  console.log('delete employee route hit')
   //retrieve id from url params
   const id = request.nextUrl.searchParams.get("id");
 
