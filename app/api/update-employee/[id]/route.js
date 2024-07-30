@@ -15,8 +15,11 @@ export async function PUT(request, { params }) {
     );
   }
 
-  const { newEmail: email } = await request.json();
+  const { newEmail: email, newFirstName: firstName, newLastName: lastName } = await request.json();
   console.log("email: ", email);
+  console.log("firstName: ", firstName)
+  console.log("lastName: ", lastName)
+
 
   try {
     const { collection, objectId } = await getCollectionAndObjectId(
@@ -40,7 +43,7 @@ export async function PUT(request, { params }) {
     if (result) {
       const updateResult = await collection.updateOne(
         { _id: objectId },
-        { $set: { email: email } }
+        { $set: { email: email, firstName: firstName, lastName: lastName } }
       );
       console.log("updateResult: ", updateResult);
 

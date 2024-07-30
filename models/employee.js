@@ -96,7 +96,7 @@ const EmployeeSchema = new mongoose.Schema({
   },
   geo: {
     type: geoSchema,
-    default: null,
+    required: false,
   },
 
   assignmentAddress : {
