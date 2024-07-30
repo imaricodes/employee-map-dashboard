@@ -1,5 +1,6 @@
 import React from "react";
 import EditEmployeeForm from "@/components/EditEmployeeForm";
+import { notFound } from "next/navigation";
 
 const getEmployeeById = async (id) => {
   try {
@@ -17,19 +18,31 @@ const getEmployeeById = async (id) => {
   }
 };
 
-const EditEmployee = async ({params}) => {
+const EditEmployee = async ({ params }) => {
   const { id } = params;
 
   //get current employee
   const res = await getEmployeeById(id);
-  const employee = res.result
-  console.log('employee in edit employee page: ',(employee))
+
+  if (!res) {
+    notFound();
+  }
+
+  const employee = res.result;
+  console.log("employee in edit employee page: ", employee);
 
   //destructure fields to update from returned employee
-  const {firstName, lastName, email} = employee;
+  const { firstName, lastName, email } = employee;
 
   //pass fields as props to edit employee form
-  return <EditEmployeeForm id = {id} firstName={firstName} lastName={lastName} email={email} />;
+  return (
+    <EditEmployeeForm
+      id={id}
+      firstName={firstName}
+      lastName={lastName}
+      email={email}
+    />
+  );
 };
 
 export default EditEmployee;
