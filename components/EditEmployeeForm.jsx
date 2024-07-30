@@ -55,7 +55,7 @@ const EditEmployeeForm = ({ id, firstName, lastName, email }) => {
     try {
       // pass user entered data to update-employee route
       const res = await fetch(
-        `http://localhost:3000/api/update-employee/${id}`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/update-employee/${id}`,
         {
           method: "put",
           headers: {
