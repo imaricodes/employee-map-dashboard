@@ -24,9 +24,9 @@ const EditEmployee = async ({ params }) => {
   //get current employee
   const res = await getEmployeeById(id);
 
-  if (!res) {
-    notFound();
-  }
+  // if (!res) {
+  //   notFound();
+  // }
 
   const employee = res.result;
   console.log("employee in edit employee page: ", employee);
